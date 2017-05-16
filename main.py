@@ -1,4 +1,5 @@
 import pungenerationtools as pgt
+import wordreplacement
 
 
 def main():
@@ -22,18 +23,18 @@ def main():
 
         # find words that are similar to the subjects within a certain cosine similarity
         replacements = []
-        for sub in subjects:
-            repsForSub = pgt.findSimilarWords(sub, True)
+        for (sub, posTag) in subjects:
+            repsForSub = pgt.findSimilarWords(sub, posTag, verbose=False)
             replacements += repsForSub
             print("    Replacements for \"{0}\": {1}".format(sub, repsForSub))
 
         # fine the phonetics of each of the subject words
         subjectPhonetics = []
-        for (word, cos) in replacements:
-            subjectPhonetics.append(pgt.generatePhoneticsOfWord(word))
+        for (word, _) in replacements:
+            subjectPhonetics.append(pgt.generatePhoneticsOfWord(word, verbose=True))
 
         # Identify any matching series of sounds between the replacements and the original input and make the substitution
-        #TODO
+        # TODO
 
 
 if __name__ == '__main__':
